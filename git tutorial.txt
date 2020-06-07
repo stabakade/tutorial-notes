@@ -1,0 +1,118 @@
+This is just to keep yourself updated with what concepts you need to know before interview.
+Remember, you use git bash for all the git related activities!
+Only the topics and their basic definition will be written, rest you can google
+
+i)) to check version: git --version
+
+ii)) set config values(so that we/other developers can see whose code): git config --global user.name "username"
+							     git config --global user.email "your email"
+			to check your config values: 		     git config --list
+
+iii)) Need help with any action? :         git help verb    or git verb --help   e.g. git add --help
+
+iv)) We can track any project using git, to do that first we have to initialise git inside that directory.
+			git init : it will initialise an empty git repository in that project
+
+v)) Now if we don't wanna track our project using git, then we can simply remove .git folder using:
+			rm -rf .git 
+
+vi)) Before adding anything, check status if there's anything we wanna ignore. Suppose 
+a .project and *.pyc file is to be ignored. We'll create a .gitignore file and add .project and *.pyc file in it
+		touch .gitignore     (it will create .gitignore file)
+
+vii)) There are three stages while working on a project: working directory       staging area              .git repository
+					       (where our project is   (where we commit)
+					along with untracked files)
+
+viii)) Adding files to staging area: git add <directory or file name>  (this will add them to the staging area) 
+					matlab ab vo track ho rahe hain
+			e.g. git add .gitignore  (.project and *.pyc files will start getting tracked too!)
+			to add everything to the staging area: git add -A
+
+ix)) Remove files from the staging area: git reset .gitignore      (purani stage pe aa jayega)
+				git reset       (sab kuch remove ho jayega staging area se)
+
+x)) Just after adding your file/directory to the staging area, commit with something short but descriptive
+			git commit -m "This is my initial commit"
+   Also there is a command which gives a hashcode for your code
+			git log    (not very much important)
+
+xi)) Working with remote project: (what actually developers do) Cloning a remote repo:
+		git clone <url> <where you want to clone>
+		git clone ../remote_repo.git .     (we can also use local paths in place of url) and . means here
+		kahi kisi url se cloning karke kisi aur directory me dalna ho to tab ye karte hain.
+
+xii)) Viewing information from that remote repository: git remote -v or git branch -a
+
+xiii)) Pushing changes: Now suppose we did some changes in our file and we want to push these changes.
+First we will push these locally.
+git diff --> (shows what changes were made with using + and - signs, matlab ye add kiya aur ye minus)
+git status
+git add -A
+git commit -m "Your commit message"   always apply these four for better development.
+Okay! Now we will push this to a remote repository.
+	git pull origin master    (last time kya changes kiye the dekhna padta hai isliye)
+	git push origin master     (origin is the name of our branch)
+So, this code will get pushed to our master branch
+
+xiv))       					Common Workflow
+So far we've been working directly on our master branch. If we wanna add a new feature,
+we will create a branch.        git branch <name of branch(feature related rakhega to sahi hoga)>
+to see which branch we're on, write:       
+		git branch
+now to switch to/check out other branch: 
+		   git checkout <branch name>
+again check the branch by git branch. you'll see you are on this branch.
+In this way, you can add features using a different local branch without changing local master
+branch and without affecting remote repository.
+
+xv)) Pushing branch to remote repository: git push -u origin <branch name> 
+-u : it links local <branch name> repository with remote <branch name> repository
+origin : it is the branch name of remote repository
+iske baad habit me daal lo : git branch -a
+it will show you all your branches and everything
+Companies add this to remote repository on other branch, run unit tests on it, if everything
+works fine, then they merge it with master branch.
+
+xvi)) How to merge branches.
+	git checkout master   --> switches to local master branch
+	git pull origin master  --> checks everything before pushing, pull down all the changes
+	git branch --merged  -->  tells us the branches that have been merged(your <branch name> won't show here coz it hasn't been merged yet!)
+	git merge <branch name>  --> merges it with local master branch
+	Now, we can push these changes to the remote master branch!
+	git push origin master  --> pushes to the remote master branch
+Now that we have pushed our local branch to the remote master branch, we can delete our local branch
+
+xvii)) How to delete branches.
+	git branch --merged  --> here it will show all the merged branches(it will show our <branch name> too)
+	git branch -d <branch name>  --> deletes the branch from our local repository
+	git branch -a --> it will show our branches, also our <branch name> branch in remote repository
+	git push origin --delete <branch name> --> it will delete our <branch name> branch from remote repository as well!
+Dunzo!
+
+xviii)) Overall: Faster example
+Suppose we wanna add a subtract function
+first create a branch   -->    git branch subtract
+go to our subtract branch  -->  git checkout subtract
+then modify your code, save that
+check git status  -->  git status
+add your code to the staging directory  --> git add -A
+write a commit  -->  git commit -m "Subtract feature added!"
+push this branch to our remote repository  -->  git push -u origin subtract
+now we're ready to merge this with master
+check master branch  --> git checkout master
+now we wanna pull in all the changes that we have made  --> git pull origin master
+now merge it with master  -->  git merge subtract
+we'll push these changes  -->  git push origin master
+            
+______________________________________________________________________________________________________________________________________________________________
+
+agar zyada dimag nahi lagana to ye kiya kar
+-- git init
+-- git diff
+-- git status
+-- git add .
+-- git commit -m "our commit"     --> jin files me changes hue hain bas usi me commit message show hoga!
+-- git remote add origin <url of github>
+-- git push -u origin master    --> agar error aata hai ki failed to push kyoki #*sdvm@, to use this: git push origin master --force
+
