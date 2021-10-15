@@ -116,3 +116,32 @@ agar zyada dimag nahi lagana to ye kiya kar
 -- git remote add origin <url of github>
 -- git push -u origin master    --> agar error aata hai ki failed to push kyoki #*sdvm@, to use this: git push origin master --force
 
+_______________________________________________________________________________________________________________________________________________________________
+
+Open source contributtion:
+(https://www.dataschool.io/how-to-contribute-on-github/)
+
+-- Fork the repo
+-- Clone the repo from your local                 git clone URL_OF_FORK
+-- Go into your repository location and check that your fork is your 'origin' remote        
+	git remote -v
+	if you don't see the origin:    git remote add origin URL_OF_FORK
+-- Now go to the main project and add it in your upstream
+	git remote add upstream URL_OF_PROJECT      (url is of main project where you forked your project from)
+-- Before making any changes to local, pull changes from upstream to your local
+	git pull upstream master       
+	(this pulls changes from master branch of upstream to your local)
+-- Create a new branch
+	git checkout -b BRANCH_NAME
+	gti branch        (to show your local branches)
+-- Make changes and then add and commit
+	git add -A
+	git commit -m "description"
+-- Push changes to origin
+	git push origin BRANCH_NAME
+	(This "pushes" your changes to the "BRANCH_NAME" branch of the "origin" (which is your fork on GitHub)
+	(pehle apne github pe push karenge fir hi main project ke liye pull request karenge)
+-- Go to your Github and create a pull request. When opening a "pull request", you are making a "request" that the project repository "pull" changes from your fork. Also review the pull request. Discuss and stuff
+-- Delete your branch
+	git checkout master
+	git branch -D BRANCH_NAME
